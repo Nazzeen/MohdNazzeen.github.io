@@ -86,7 +86,6 @@
     }
 
     function calculatePrice(item, quantity) {
-      // Define the price for each item
       var itemPrices = {
         chicken     : 12.99,
         lamb        : 32.99,
@@ -109,13 +108,12 @@
         starfruit   : 8.99,
       };
 
-      // Check if the item exists in the itemPrices object
+      
       if (itemPrices.hasOwnProperty(item)) {
-        // Calculate the total price for the item based on quantity
         var price = itemPrices[item] * quantity;
         return price;
       } else {
-        // If the item is not found in the itemPrices object, return 0
+        
         return 0;
       }
     }
