@@ -1,0 +1,48 @@
+body {
+  background-image: url(farm.jpg);
+  opacity: 1.00;  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  }
+  
+  .checkout-box {
+    opacity: 89%;
+  position: relative;
+  padding: 20px;
+  border: 3px dashed #000000;
+  margin-bottom: auto;
+  margin-right: 500px;
+  border-radius: 18px;
+background: #ffdc16;
+box-shadow:  5px 5px 10px #ffdc16,
+             -5px -5px 10px #ffdc16;
+}
+  
+.button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left-buttons {
+    display: flex;
+  }
+  
+  #clearcart,
+  #goToMenuBtn {
+    margin-right: 10px;
+  }
+  
+  #paymentBtn {
+    margin-left: auto;
+  }
+  
+  #cartItems li {
+    font-size: 25px;
+  }
+  
+  #totalPrice {
+    font-size: 30px;
+  }
+
+  

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nazete Grocery Selection</title>
+  <link rel="stylesheet" href="main menu.css">
+</head>
+<body>
+  <header></header>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Retrieve cart items from localStorage
+      var cartItems = JSON.parse(localStorage.getItem("cart"));
+
+      // Display the cart items on the main menu page
+      var cartItemsDiv = document.getElementById("cartItems");
+      var items = "";
+
+      if (cartItems) {
+        if (cartItems.meat) {
+          items += "<h3>Meat Section:</h3>";
+          for (var meat in cartItems.meat) {
+            if (cartItems.meat.hasOwnProperty(meat)) {
+              items += "<li>" + meat + " x " + cartItems.meat[meat] + "</li>";
+            }
+          }
+        }
+
+        if (cartItems.vegetable) {
+          items += "<h3>Vegetable Section:</h3>";
+          for (var vegetable in cartItems.vegetable) {
+            if (cartItems.vegetable.hasOwnProperty(vegetable)) {
+              items += "<li>" + vegetable + " x " + cartItems.vegetable[vegetable] + "</li>";
+            }
+          }
+        }
+
+        if (cartItems.fruit) {
+          items += "<h3>Fruit Section:</h3>";
+          for (var fruit in cartItems.fruit) {
+            if (cartItems.fruit.hasOwnProperty(fruit)) {
+              items += "<li>" + fruit + " x " + cartItems.fruit[fruit] + "</li>";
+            }
+          }
+        }
+      }
+
+      cartItemsDiv.innerHTML = items;
+    });
+  </script>
+  
+  <section class="intro-section">
+    <h2 id="intro1">SUNNY DAY GROCERY STORE</h2>
+    <p id="intro2">Enjoy our freshest product in the market</p>
+    <p id="intro2">We have a wide variety of selection. Please click one of the pictures to see our products in detail.</p>
+  </section>
+  
+  <div class="word-container" id="wordpicture1">
+    <div class="wordpicture1">MEAT SECTION</div>
+  </div>
+  <div class="word-container" id="wordpicture2">
+    <div class="wordpicture2">VEGETABLE SECTION</div>
+  </div>
+  <div class="word-container" id="wordpicture3">
+    <div class="wordpicture3">FRUIT SECTION</div>
+  </div>
+  
+  <div class="images" id="images1">
+    <a href="meatPage.html">
+      <img src="meat.jpg" alt="meats picture" width="350" height="350">
+    </a>
+  </div>
+  
+  
+  
+  <div class="images" id="images2">
+    <a href="vegetablePage.html">
+      <img src="vegetable.png" alt="vegetable picture" width="350" height="350">
+    </a>
+  </div>
+  
+  
+  
+  <div class="images" id="images3">
+    <a href="fruitPage.html">
+      <img src="fruit.jpg" alt="fruit picture" width="350" height="350">
+    </a>
+  </div>
+  
+  <br>
+  
+  <p class="paragraph1">Interested in our product? You can support our business by purchasing our product by clicking the button below!</p>
+  
+  <div class="button-container">
+    <form action="check-out.html">
+      <input type="submit" class="register" value="Check-out">
+    </form>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2023 Grocery Store. All rights reserved.</p>
+  </div>
+
+  <ul id="cartItems"></ul> 
+</body>
+</html>

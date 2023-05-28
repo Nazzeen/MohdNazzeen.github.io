@@ -1,0 +1,91 @@
+
+
+body {
+  background-image: url(farm.jpg);
+  opacity: 1.00;  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  }
+
+.intro #intro1 {
+  margin: 0;
+  padding: 0;
+  font-weight: bolder;
+  font-size: 20px;
+    text-align: center;
+    text-decoration: dotted;
+    text-transform: 100px;
+}
+
+p {
+    text-align: center;
+    text-transform: uppercase;
+   }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+  }
+
+  .custom-input {
+    box-sizing: border-box;
+    width: 95%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #130202;
+    border-radius: 4px;
+  }
+
+  .custom-fieldset {
+
+    border: 1px double #da1212; 
+    border-radius: 19px;
+background: #ffae2d;
+box-shadow: inset 27px -27px 53px #ffae2d,
+            inset -27px 27px 53px #ffae2d;
+  padding: 8px; 
+  font-weight: bold; 
+  }
+
+  .register {
+
+    background-color: #ffae2d;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  width: 150px;
+  border-radius: 50px;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0.4rem #ffae2d;
+  cursor: pointer;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5px;
+   }
+   
+   .register:active {
+    color: #ffae2d;
+  box-shadow: 0 0.2rem #ffae2d;
+  transform: translateY(0.2rem);
+   }
+   
+   .register:hover:not(:disabled) {
+    background: rgb(4, 3, 3);
+  color: #ffae2d;
+  text-shadow: 0 0.1rem #bcb4b4;
+   }
+   
+   .register:disabled {
+    cursor: auto;
+    color: #ffae2d;
+   }
+
+   .split {
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    gap: 15px;
+  }
+  

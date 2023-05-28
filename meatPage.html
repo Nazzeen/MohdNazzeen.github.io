@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meat Selection Form</title>
+  <link rel="stylesheet" href="meatMenu.css">
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var meatSelection = document.getElementById("meatSelection");
+      var contentDiv = document.getElementById("contentDiv");
+      var addToCartBtn = document.getElementById("addToCartBtn");
+      var cartItems = document.getElementById("cartItems");
+      var goToMenuBtn = document.getElementById("goToMenuBtn");
+      var resetCartBtn = document.getElementById("resetCartBtn");
+
+      var cart = {};
+
+      meatSelection.addEventListener("change", function() {
+        var selectedMeat = meatSelection.value;
+        var content = "";
+        var benefits = "";
+        var description = "";
+
+        switch (selectedMeat) {
+          case "chicken":
+          content = "<h2>Chicken</h2><div class='meat-container'><div class='image-container'><img src='chickenLIVE.jpeg' alt='Chicken'></div><div class='image-container'><img src='chickenDEAD.jpeg' alt='Chicken'></div><div class='price-tag'>RM12.99 per kg</div><div id='cartItems'></div></div>";
+          benefits = "<div id='benefits'><h3>Benefits of Chicken:</h3><ul><li>High in protein</li><li>Low in fat</li><li>Good source of vitamins and minerals</li></ul>";
+          description = "<h3>Farming Practices:</h3><p>Our chickens are raised in spacious and clean environments, with access to natural light and fresh air. They are fed a balanced diet free from antibiotics and hormones.<br> We prioritize their health and well-being to ensure high-quality and nutritious chicken meat.</p></div>";
+
+          case "lamb":
+            content = "<h2>Lamb</h2><div class='meat-container'><div class='image-container'><img src='lambLIVE.jpeg' alt='Lamb'></div><div class='image-container'><img src='lambDEAD.jpeg' alt='Lamb'></div><div class='price-tag'>RM32.99 per kg</div><div id='cartItems'></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Lamb:</h3><ul><li>Rich in iron and zinc</li><li>High-quality protein</li><li>Good source of B vitamins</li></ul>";
+            description = "<h3>Farming Practices:</h3><p>Our lambs are raised in open pastures, grazing on natural grass and forage. They are cared for by experienced farmers who prioritize their welfare and provide<br> them with a stress-free environment. The result is tender and flavorful lamb meat that you can enjoy.</p></div>";
+            break;
+          case "deer":
+            content = "<h2>Deer</h2><div class='meat-container'><div class='image-container'><img src='deerLIVE.jpeg' alt='Deer'></div><div class='image-container'><img src='deerDEAD.jpeg' alt='Deer'></div><div class='price-tag'>RM43.99 per kg</div><div id='cartItems'></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Deer:</h3><ul><li>Lean protein</li><li>Low in fat</li><li>Rich in iron and B vitamins</li></ul>";
+            description = "<h3>Farming Practices:</h3><p>Our deer are raised in spacious and natural habitats, allowing them to roam freely. They are fed a balanced diet and are raised without the use of artificial growth<br> enhancers or antibiotics. Our careful farming practices ensure the highest quality and naturally lean deer meat.</p></div>";
+            break;
+          case "beef":
+            content = "<h2>Beef</h2><div class='meat-container'><div class='image-container'><img src='cowLIVE.jpeg' alt='Beef'></div><div class='image-container'><img src='cowDEAD.jpeg' alt='Beef'></div><div class='price-tag'>RM25.99 per kg</div><div id='cartItems'></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Beef:</h3><ul><li>Excellent source of protein</li><li>Rich in iron and zinc</li><li>Contains essential amino acids</li></ul>";
+            description = "<h3>Farming Practices:</h3><p>Our cows are raised on lush pastures and are grass-fed for the majority of their lives. They are allowed to graze naturally, which results in the tender and flavorful<br> beef that you enjoy. We prioritize sustainable farming methods and the welfare of our animals to provide you with the highest quality beef.</p></div>";
+            break;
+          case "duck":
+            content = "<h2>Duck</h2><div class='meat-container'><div class='image-container'><img src='duckLIVE.jpeg' alt='Duck'></div><div class='image-container'><img src='duckDEAD.jpeg' alt='Duck'></div><div class='price-tag'>RM29.99 per kg</div><div id='cartItems'></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Duck:</h3><ul><li>Rich in protein</li><li>Good source of vitamins and minerals</li><li>Delicious flavor and texture</li></ul>";
+            description = "<h3>Farming Practices:</h3><p>Our ducks are raised in spacious and natural environments, with access to ponds and fresh water for swimming. They are fed a nutritious diet that enhances their flavor<br> and ensures the highest quality meat. We follow responsible farming practices to provide you with delicious and ethically raised duck meat.</p></div>";
+            break;
+          default:
+            content = "";
+            benefits = "";
+            description = "";
+            break;
+        }
+
+        contentDiv.innerHTML = content + benefits + description;
+      });
+
+      addToCartBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        var selectedMeat = meatSelection.value;
+        if (selectedMeat !== "-" && selectedMeat !== "") {
+          if (cart[selectedMeat]) {
+            cart[selectedMeat]++;
+          } else {
+            cart[selectedMeat] = 1;
+          }
+          updateCartItems();
+          
+          // Update the localStorage with the cart data
+          localStorage.setItem("cart_meat", JSON.stringify(cart));
+        }
+      });
+
+      goToMenuBtn.addEventListener("click", function() {
+        window.location.href = "Mainmenu.html";
+      });
+
+      resetCartBtn.addEventListener("click", function() {
+        cart = {};
+        updateCartItems();
+      });
+
+      function updateCartItems() {
+  var items = "<ul>";
+  for (var meat in cart) {
+    if (cart.hasOwnProperty(meat)) {
+      items += "<li>" + meat + " x" + cart[meat] + "</li>";
+    }
+  }
+  items += "</ul>";
+  cartItems.className = "cart-items";
+  cartItems.innerHTML = items;
+}
+    });
+  </script>
+</head>
+<body>
+  <h1><ins>MEAT SECTION</ins></h1>
+  <form>
+    <label for="meatSelection">Select your preferred meat:</label>
+    <select id="meatSelection" name="meat">
+      <option value="-">-</option>
+      <option value="chicken">Chicken</option>
+      <option value="lamb">Lamb</option>
+      <option value="deer">Deer</option>
+      <option value="beef">Beef</option>
+      <option value="duck">Duck</option>
+    </select>
+    <br>
+    <button id="addToCartBtn">Add to Cart</button>
+    <button id="resetCartBtn">Reset Cart</button>
+  </form>
+  <div id="contentDiv"></div>
+  <div id="cartItems"></div>
+</div>
+  <button id="goToMenuBtn">Go to Menu</button>
+</body>
+</html>

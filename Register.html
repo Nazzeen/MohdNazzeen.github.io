@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assignment 1</title>
+    <link rel="stylesheet" href="Register.css">
+  </head>
+  <body>
+    <div class="intro">
+      <p id="intro1">You almost there!!</p>
+      <p id="intro1">Please fill all necessary information to completed the payment</p>
+    </div>
+    <div class="container">
+      <form action="/process.php" method="post" onsubmit="return registerSuccess()">
+        <fieldset class="custom-fieldset">
+          <legend></legend>
+
+          <label for="fullname">Full name:</label>
+          <input type="text" class="custom-input" id="fullname" name="fullname" value="" placeholder="james smith" required>
+
+          <br><br>
+
+          <label for="gendertype">Gender:</label>
+          <input type="radio" id="GenderMan" name="gender" value="male">
+          <label for="GenderMan">Male</label>
+          <input type="radio" id="GenderWoman" name="gender" value="female">
+          <label for="GenderWoman">Female</label>
+
+          <br><br>
+
+          <label for="Address">Address:</label>
+          <input type="text" class="custom-input" id="Address" name="Address" value="" placeholder="no 12 street new york......." required>
+
+          <br><br>
+
+          <label for="phone number">phone number:</label>
+          <input type="text" class="custom-input" id="phone number" name="phone number" value="" placeholder="012345678" required>
+
+          <br><br>
+
+          <label for="Card number">Card number:</label>
+          <input type="number" class="custom-input" id="Card number" name="Card number" value="" placeholder="0000-0000-0000-0000" required>
+
+          <br><br>
+
+          <label for="password_field" class="input_label">Expiry Date / CVV</label>
+          <div class="split">
+            <input id="password_field" class="custom-input" type="text" name="input-name" title="Expiry Date" placeholder="01/23" required>
+            <input id="password_field" class="custom-input" type="number" name="cvv" title="CVV" placeholder="CVV" required>
+
+          <br><br><br>
+        </fieldset>
+
+        <div class="button-container">
+          <input type="submit" class="register" value="Register">
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function registerSuccess() {
+        alert("Payment successfully completed!");
+        localStorage.removeItem("cart_meat");
+        localStorage.removeItem("cart_vegetable");
+        localStorage.removeItem("cart_fruit");
+        window.location.href = "Mainmenu.html";
+        return false; // Prevents the form from submitting and refreshing the page
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Checkout</title>
+  <link rel="stylesheet" href="check-out.css">
+  <style>
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <h1><ins>Checkout</ins></h1>
+
+  <div class="checkout-box" id="checkoutBox">
+    <h2>Cart Items</h2>
+    <ul id="cartItems"></ul>
+    <p id="totalPrice"></p>
+    
+    <div class="button-container">
+      <div class="left-buttons">
+        <button id="clearcart" onclick="clearCart()">Clear Cart</button>
+        <button id="goToMenuBtn">Go to Menu</button>
+      </div>
+      <button id="paymentBtn" onclick="goToPayment()">Proceed to Payment</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var goToMenuBtn = document.getElementById("goToMenuBtn");
+      var cartItems = document.getElementById("cartItems");
+      var totalPrice = document.getElementById("totalPrice");
+      var cart_meats = JSON.parse(localStorage.getItem("cart_meat"));
+      var cart_vegetables = JSON.parse(localStorage.getItem("cart_vegetable"));
+      var cart_fruits = JSON.parse(localStorage.getItem("cart_fruit"));
+
+      var items = "";
+      var total = 0;
+
+      if (cart_meats) {
+        for (var item in cart_meats) {
+          if (cart_meats.hasOwnProperty(item)) {
+            items += "<li>" + item + " x " + cart_meats[item] + "</li>";
+            total += calculatePrice(item, cart_meats[item]);
+          }
+        }
+      }
+
+      if (cart_vegetables) {
+        for (var item in cart_vegetables) {
+          if (cart_vegetables.hasOwnProperty(item)) {
+            items += "<li>" + item + " x " + cart_vegetables[item] + "</li>";
+            total += calculatePrice(item, cart_vegetables[item]);
+          }
+        }
+      }
+
+      if (cart_fruits) {
+        for (var item in cart_fruits) {
+          if (cart_fruits.hasOwnProperty(item)) {
+            items += "<li>" + item + " x " + cart_fruits[item] + "</li>";
+            total += calculatePrice(item, cart_fruits[item]);
+          }
+        }
+      }
+
+      cartItems.innerHTML = items;
+      totalPrice.innerHTML = "Total Price: RM" + total.toFixed(2);
+    });
+
+    goToMenuBtn.addEventListener("click", function() {
+      window.location.href = "Mainmenu.html";
+    });
+
+    function clearCart() {
+      localStorage.removeItem("cart_meat");
+      localStorage.removeItem("cart_vegetable");
+      localStorage.removeItem("cart_fruit");
+      document.getElementById("cartItems").innerHTML = "";
+      document.getElementById("totalPrice").innerHTML = "";
+    }
+
+    function goToPayment() {
+      window.location.href = "Register.html";
+    }
+
+    function calculatePrice(item, quantity) {
+      // Define the price for each item
+      var itemPrices = {
+        chicken     : 12.99,
+        lamb        : 32.99,
+        deer        : 43.99,
+        beef        : 25.99,
+        duck        : 29.99,
+        cabbage     : 2.99,
+        potato      : 4.99,
+        eggplant    : 12.99,
+        broccoli    : 4.59,
+        carrots     : 2.49,
+        lettuce     : 5.19,
+        cauliflower : 11.99,
+        strawberry  : 19.99,
+        orange      : 8.99,
+        plums       : 7.99,
+        grape       : 15.99,
+        pineapple   : 12.99,
+        watermelon  : 25.99,
+        starfruit   : 8.99,
+      };
+
+      // Check if the item exists in the itemPrices object
+      if (itemPrices.hasOwnProperty(item)) {
+        // Calculate the total price for the item based on quantity
+        var price = itemPrices[item] * quantity;
+        return price;
+      } else {
+        // If the item is not found in the itemPrices object, return 0
+        return 0;
+      }
+    }
+  </script>
+</body>
+</html>

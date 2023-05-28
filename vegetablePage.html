@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vegetable Selection Form</title>
+  <link rel="stylesheet" href="vegetableMenu.css">
+  
+  <style>
+    /* Add your CSS styles for the menu button here */
+  </style>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var goToMenuBtn = document.getElementById("goToMenuBtn");
+      var contentDiv = document.getElementById("contentDiv");
+      var addToCartBtn = document.getElementById("addToCartBtn");
+      var cartItems = document.getElementById("cartItems");
+      var vegetableSelection = document.getElementById("vegetableSelection");
+      var resetCartBtn = document.getElementById("resetCartBtn");
+      
+      var cart = {};
+
+      vegetableSelection.addEventListener("change", function() {
+        var selectedVegetable = vegetableSelection.value;
+        var content = "";
+        var benefits = "";
+        var description = "";
+
+        switch (selectedVegetable) {
+          case "cabbage":
+            content = "<h2>Cabbage</h2><div class='vegetable-container'><div class='image-container'><img src='cabbage.jpeg' alt='Cabbage'></div><div class='price-container'><div class='price-tag'>RM2.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Cabbage:</h3><ul><li>Rich in fiber and vitamins</li><li>High water content</li><li>Supports digestive health</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Cabbage is a leafy green vegetable with a crisp texture. It is known for its versatility in various dishes and its health benefits.<br> We source our cabbage from local farmers who prioritize sustainable farming practices, ensuring the freshness and nutritional value of the cabbage you enjoy.</p></div>";
+            break;
+          case "potato":
+            content = "<h2>Potato</h2><div class='vegetable-container'><div class='image-container'><img src='potato.jpeg' alt='Potato'></div><div class='price-container'><div class='price-tag'>RM4.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Potato:</h3><ul><li>Good source of carbohydrates</li><li>High in potassium and vitamin C</li><li>Dietary fiber</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Potato is a starchy root vegetable that is widely consumed around the world. It is a versatile ingredient and provides<br> essential nutrients. Our potatoes are sourced from local farms committed to sustainable farming practices, ensuring the quality of the potatoes you enjoy.</p></div>";
+            break;
+          case "eggplant":
+            content = "<h2>Eggplant</h2><div class='vegetable-container'><div class='image-container'><img src='eggplant.jpeg' alt='Eggplant'></div><div class='price-container'><div class='price-tag'>RM12.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Eggplant:</h3><ul><li>Rich in antioxidants</li><li>Good source of dietary fiber</li><li>Low in calories</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Eggplant is a versatile vegetable with a unique flavor. It is commonly used in various cuisines and provides several health benefits.<br> We source our eggplants from local farmers who follow sustainable practices, ensuring that you receive fresh and high-quality eggplants.</p></div>";
+            break;
+          case "broccoli":
+            content = "<h2>Broccoli</h2><div class='vegetable-container'><div class='image-container'><img src='broccoli.jpeg' alt='Broccoli'></div><div class='price-container'><div class='price-tag'>RM4.59 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Broccoli:</h3><ul><li>Rich in vitamins and minerals</li><li>High in fiber</li><li>Contains powerful antioxidants</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Broccoli is a nutritious vegetable with a distinct taste and texture. It is known for its numerous health benefits and versatility in cooking.<br> We source our broccoli from local farmers who prioritize sustainable farming practices, ensuring that you receive fresh and flavorful broccoli.</p></div>";
+            break;
+          case "carrots":
+            content = "<h2>Carrots</h2><div class='vegetable-container'><div class='image-container'><img src='carrots.jpeg' alt='Carrots'></div><div class='price-container'><div class='price-tag'>RM2.49 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Carrots:</h3><ul><li>Excellent source of beta-carotene</li><li>Rich in vitamins and minerals</li><li>High in dietary fiber</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Carrots are root vegetables that are known for their vibrant color and sweet flavor. They are packed with nutrients and provide various health benefits.<br> Our carrots are sourced from local farmers who prioritize sustainable farming methods, ensuring that you receive fresh and nutritious carrots.</p></div>";
+            break;
+          case "lettuce":
+            content = "<h2>Lettuce</h2><div class='vegetable-container'><div class='image-container'><img src='lettuce.jpeg' alt='Lettuce'></div><div class='price-container'><div class='price-tag'>RM5.19 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Lettuce:</h3><ul><li>Low in calories</li><li>Rich in vitamins and minerals</li><li>Good source of dietary fiber</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Lettuce is a leafy green vegetable that is often used as a base for salads and sandwiches. It provides essential nutrients and contributes to a healthy diet.<br> We source our lettuce from local farmers who prioritize sustainable farming practices, ensuring the freshness and quality of the lettuce you enjoy.</p></div>";
+            break;
+          case "cauliflower":
+            content = "<h2>Cauliflower</h2><div class='vegetable-container'><div class='image-container'><img src='cauliflower.jpeg' alt='Cauliflower'></div><div class='price-container'><div class='price-tag'>RM11.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Cauliflower:</h3><ul><li>Rich in vitamins and minerals</li><li>High in dietary fiber</li><li>Low in calories</li></ul>";
+            description = "<h3>Vegetable Description:</h3><p>Cauliflower is a versatile vegetable that can be enjoyed in various dishes. It provides several health benefits and is a nutritious addition to your meals.<br> We source our cauliflower from local farmers who follow sustainable farming practices, ensuring the freshness and quality of the cauliflower you receive.</p></div>";
+            break;
+          default:
+            content = "";
+            benefits = "";
+            description = "";
+            break;
+        }
+        
+        contentDiv.innerHTML = content + benefits + description;
+      });
+  
+      addToCartBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        var selectedVegetable = vegetableSelection.value;
+        if (selectedVegetable !== "-" && selectedVegetable !== "") {
+          if (cart[selectedVegetable]) {
+            cart[selectedVegetable]++;
+          } else {
+            cart[selectedVegetable] = 1;
+          }
+          updateCartItems();
+        }
+        localStorage.setItem("cart_vegetable", JSON.stringify(cart));
+      });
+  
+      goToMenuBtn.addEventListener("click", function() {
+        window.location.href = "Mainmenu.html";
+      });
+  
+      resetCartBtn.addEventListener("click", function() {
+        cart = {};
+        updateCartItems();
+      });
+  
+      function updateCartItems() {
+        var items = "";
+        for (var vegetable in cart) {
+          if (cart.hasOwnProperty(vegetable)) {
+            items += "<li>" + vegetable + " x " + cart[vegetable] + "</li>";
+          }
+        }
+        cartItems.className = "cart-items";
+        cartItems.innerHTML = items;
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="container">
+    <h1>Vegetable Selection</h1>
+    <form>
+      <label for="vegetableSelection">Select a preferred vegetable:</label>
+      <select id="vegetableSelection" name="vegetable">
+        <option value="-">-</option>
+        <option value="cabbage">Cabbage</option>
+        <option value="potato">Potato</option>
+        <option value="eggplant">Eggplant</option>
+        <option value="broccoli">Broccoli</option>
+        <option value="carrots">Carrots</option>
+        <option value="lettuce">Lettuce</option>
+        <option value="cauliflower">Cauliflower</option>
+      </select>
+      <br>
+      <button id="addToCartBtn">Add to Cart</button>
+      <button id="resetCartBtn">Reset Cart</button>
+    </form>
+    <div id="contentDiv"></div>
+    <div id="cartItems"></div>
+    <button id="goToMenuBtn">Go to Main Menu</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fruit Selection Form</title>
+  <link rel="stylesheet" href="fruitMenu.css">
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var goToMenuBtn = document.getElementById("goToMenuBtn");
+      var addToCartBtn = document.getElementById("addToCartBtn");
+      var cartItems = document.getElementById("cartItems");
+      var fruitSelection = document.getElementById("fruitSelection");
+      var contentDiv = document.getElementById("contentDiv");
+      var resetCartBtn = document.getElementById("resetCartBtn");
+
+      var cart = {};
+
+      if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+        updateCartItems();
+      }
+
+      fruitSelection.addEventListener("change", function() {
+        var selectedFruit = fruitSelection.value;
+        var content = "";
+        var benefits = "";
+        var description = "";
+
+        switch (selectedFruit) {
+          case "strawberry":
+            content = "<h2>Strawberry</h2><div class='fruit-container'><div class='image-container'><img src='strawberry.jpeg' alt='Strawberry'></div><div class='price-container'><div class='price-tag'>RM19.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Strawberry:</h3><ul><li>High in antioxidants</li><li>Rich in vitamins and minerals</li><li>Good source of dietary fiber</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Strawberries are sweet and juicy fruits that are enjoyed fresh or in various desserts. They are packed with nutrients and offer numerous health benefits.<br> We source our strawberries from local farmers who prioritize quality and freshness, ensuring that you receive delicious and nutritious strawberries.</p><d/iv>";
+            break;
+          case "orange":
+            content = "<h2>Orange</h2><div class='fruit-container'><div class='image-container'><img src='orange.jpeg' alt='Orange'></div><div class='price-container'><div class='price-tag'>RM8.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Orange:</h3><ul><li>Excellent source of vitamin C</li><li>Rich in antioxidants</li><li>Contributes to a healthy immune system</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Oranges are citrus fruits known for their refreshing taste and high vitamin C content. They provide a range of health benefits and are a popular choice for fresh juices.<br> We source our oranges from trusted growers who prioritize quality, ensuring that you receive juicy and flavorful oranges.</p><d/iv>";
+            break;
+          case "plums":
+            content = "<h2>Plums</h2><div class='fruit-container'><div class='image-container'><img src='plums.jpeg' alt='Plums'></div><div class='price-container'><div class='price-tag'>RM7.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Plums:</h3><ul><li>Rich in vitamins and minerals</li><li>Good source of dietary fiber</li><li>Contain antioxidants</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Plums are delicious and juicy fruits with a sweet and tangy flavor. They are packed with essential nutrients and provide various health benefits.<br> We source our plums from local orchards, ensuring that you receive fresh and high-quality plums to enjoy.</p><d/iv>";
+            break;
+          case "grape":
+            content = "<h2>Grape</h2><div class='fruit-container'><div class='image-container'><img src='grape.jpeg' alt='Grape'></div><div class='price-container'><div class='price-tag'>RM15.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Grape:</h3><ul><li>Rich in antioxidants</li><li>Good source of vitamins and minerals</li><li>Supports heart health</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Grapes are small, juicy fruits available in a variety of colors and flavors. They are not only delicious but also offer numerous health benefits.<br> We source our grapes from vineyards that prioritize quality and follow sustainable farming practices, ensuring that you receive flavorful and nutritious grapes.</p><d/iv>";
+            break;
+          case "pineapple":
+            content = "<h2>Pineapple</h2><div class='fruit-container'><div class='image-container'><img src='pineapple.jpeg' alt='Pineapple'></div><div class='price-container'><div class='price-tag'>RM12.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Pineapple:</h3><ul><li>Rich in vitamins and minerals</li><li>Contains enzymes that aid digestion</li><li>Provides immune-boosting properties</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Pineapple is a tropical fruit known for its sweet and tangy taste. It is not only delicious but also offers various health benefits and is a versatile ingredient in many dishes.<br> We source our pineapples from tropical regions, ensuring that you receive fresh and flavorful pineapples for your enjoyment.</p><d/iv>";
+            break;
+          case "watermelon":
+            content = "<h2>Watermelon</h2><div class='fruit-container'><div class='image-container'><img src='watermelon.jpeg' alt='Watermelon'></div><div class='price-container'><div class='price-tag'>RM25.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Watermelon:</h3><ul><li>Hydrating and refreshing</li><li>Rich in vitamins A and C</li><li>Contains antioxidants</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Watermelon is a juicy and refreshing fruit that is perfect for hot summer days. It not only quenches your thirst but also provides several health benefits.<br> We source our watermelons from trusted farms, ensuring that you receive ripe and sweet watermelons that are bursting with flavor.</p><d/iv>";
+            break;
+          case "starfruit":
+            content = "<h2>Starfruit</h2><div class='fruit-container'><div class='image-container'><img src='starfruit.jpeg' alt='Starfruit'></div><div class='price-container'><div class='price-tag'>RM8.99 per kg</div></div></div>";
+            benefits = "<div id='benefits'><h3>Benefits of Starfruit:</h3><ul><li>Rich in vitamin C and antioxidants</li><li>Low in calories</li><li>Supports digestion</li></ul>";
+            description = "<h3>Fruit Description:</h3><p>Starfruit, also known as carambola, is a tropical fruit with a unique shape and flavor. It offers various health benefits and is a delightful addition to fruit salads and beverages.<br> We source our starfruits from reputable growers, ensuring that you receive fresh and high-quality starfruits for your enjoyment.</p><d/iv>";
+            break;
+          default:
+            content = "";
+            benefits = "";
+            description = "";
+            break;
+        }
+
+        contentDiv.innerHTML = content + benefits + description;
+      });
+      addToCartBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        var selectedFruit = fruitSelection.value;
+        if (selectedFruit !== "-" && selectedFruit !== "") {
+          if (cart[selectedFruit]) {
+            cart[selectedFruit]++;
+          } else {
+            cart[selectedFruit] = 1;
+          }
+          updateCartItems();
+
+          localStorage.setItem("cart_fruit", JSON.stringify(cart));
+        }
+      });
+  
+      goToMenuBtn.addEventListener("click", function() {
+        window.location.href = "Mainmenu.html";
+      });
+  
+      resetCartBtn.addEventListener("click", function() {
+        cart = {};
+        updateCartItems();
+      });
+  
+      function updateCartItems() {
+        var items = "";
+        for (var fruit in cart) {
+          if (cart.hasOwnProperty(fruit)) {
+            items += "<li>" + fruit + " x " + cart[fruit] + "</li>";
+          }
+        }
+        cartItems.className = "cart-items";
+        cartItems.innerHTML = items;
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>FRUIT SECTION</h1>
+  <form>
+    <label for="fruitSelection">Select your preferred fruit:</label>
+    <select id="fruitSelection" name="fruit">
+      <option value="-">-</option>
+      <option value="strawberry">Strawberry</option>
+      <option value="orange">Orange</option>
+      <option value="plums">Plums</option>
+      <option value="grape">Grape</option>
+      <option value="pineapple">Pineapple</option>
+      <option value="watermelon">Watermelon</option>
+      <option value="starfruit">Starfruit</option>
+    </select>
+    <br>
+    <button id="addToCartBtn">Add to Cart</button>
+    <button id="resetCartBtn">Reset Cart</button>
+  </form>
+  <div id="contentDiv"></div>
+  <div id="cartItems"></div>
+  <button id="goToMenuBtn">Go to Main Menu</button>
+  </div>
+</body>
+</html>
